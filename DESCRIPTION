@@ -1,0 +1,13 @@
+Package: pistar
+Type: Package
+Title: Rudas, Clogg and Lindsay Mixture Index of Fit
+Version: 0.5.1
+Date: 2013-09-27
+Authors@R: person("Juraj", "Medzihorsky", 
+                  role = c("aut", "cre"), 
+                  email = "juraj.medzihorsky@gmail.com")
+Author: Juraj Medzihorsky <juraj.medzihorsky@gmail.com>
+Maintainer: Juraj Medzihorsky <juraj.medzihorsky@gmail.com>
+Depends: methods
+Description: Functions for estimating the Rudas, Clogg and Lindsay mixture index of fit.
+License: GPL (>= 2)
