@@ -177,7 +177,7 @@ pistar.ll(data, margin = list(1, 2), start = rep(1, length(data)), eps = 0.1,
 				 dimnames=dimnames(HairEyeColor))
 
 	#	find pi* for independence in a 3-way table
-	p <- pistar(proc='ll', data=HEC, margin=list(1, 2, 3), jack=FALSE)
+	p <- pistar(proc="ll", data=HEC, margin=list(1, 2, 3), jack=FALSE)
 
 	p
 
@@ -191,7 +191,7 @@ pistar.ll(data, margin = list(1, 2), start = rep(1, length(data)), eps = 0.1,
 	H <- matrix((1:4)*1e1, byrow=TRUE, ncol=2)
 
 	#	find pi* and model parameter estimates and perform jackknife
-	h <- pistar(proc='ll', data=H, margin=list(1, 2), param=TRUE, jack=TRUE)
+	h <- pistar(proc="ll", data=H, margin=list(1, 2), param=TRUE, jack=TRUE)
 
 	h
 

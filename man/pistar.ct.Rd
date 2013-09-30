@@ -180,7 +180,7 @@ pistar.ct(data, fn, from = .Machine$double.neg.eps^0.25,
 	}
 
 	#	find pi*
-	p <- pistar(proc='ct', data=Fienberg1980a, fn=mf, jack=FALSE)
+	p <- pistar(proc="ct", data=Fienberg1980a, fn=mf, jack=FALSE)
 
 	p
 

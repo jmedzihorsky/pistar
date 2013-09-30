@@ -125,7 +125,7 @@ pistar.mvn(data, cor_matrix = FALSE, max_dif = .Machine$double.neg.eps^0.5,
 	A <- cbind(rnorm(n), rnorm(n))
 
 	#	find pi*
-	a <- pistar(proc='mvn', data=A, jack=FALSE)
+	a <- pistar(proc="mvn", data=A, jack=FALSE)
 
 	a
 

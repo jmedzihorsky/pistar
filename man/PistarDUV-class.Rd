@@ -14,7 +14,8 @@ Objects can be created by calls of the form \code{new("PistarDUV", ...)} or \cod
 %%  ~~ describe objects here ~~ 
 }
 \usage{
-\S4method{plot}{PistarDUV}(x, model_col = 'blue', unres_col = 'grey', combi_col = 'black', pos = 'topright', bty = 'n', ... )
+\S4method{plot}{PistarDUV}(x, model_col = "blue", unres_col = "grey", combi_col = "black", 
+pos = "topright", bty = "n", ... )
 }
 \arguments{
 	\item{x}{

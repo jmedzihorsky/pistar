@@ -189,7 +189,7 @@ pistar.uv(data, dfn, n_par = NULL, inits = NULL, discrete = FALSE,
 	}
 
 	#	find pi*
-	pe <- pistar(proc='uv', data=te, dfn=md, n_par=1,
+	pe <- pistar(proc="uv", data=te, dfn=md, n_par=1,
 				 discrete=TRUE, freq=TRUE, jack=FALSE)
 
 	pe
@@ -205,7 +205,7 @@ pistar.uv(data, dfn, n_par = NULL, inits = NULL, discrete = FALSE,
 	y <- c(rnorm(1e2, 0, 2), runif(2e1, -1, 1))
 
 	#	find pi* and parameters for normal dist.
-	py <- pistar(proc='uv', data=y, dfn=dnorm, n_par=2, discrete=FALSE, 
+	py <- pistar(proc="uv", data=y, dfn=dnorm, n_par=2, discrete=FALSE, 
 				 jack=FALSE)
 
 	py

@@ -63,7 +63,7 @@ pistar(proc, ...)
 	H <- matrix(rpois(4, 20), ncol=2)
 
 	#	find pi* for independence (i.e. odds ratio of 1)
-	h <- pistar(proc='2by2', data=H, alpha=1, jack=FALSE)
+	h <- pistar(proc="2by2", data=H, alpha=1, jack=FALSE)
 
 	h
 }

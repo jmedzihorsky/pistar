@@ -49,7 +49,7 @@
 
     curve(pearson2pistar, from=-1,
           xlab=expression(rho), 
-          ylab=expression(pi^symbol('*')))
+          ylab=expression(pi^symbol("*")))
 
 }
 

@@ -17,8 +17,8 @@
 	\tabular{ll}{
 		Package: 	\tab pistar		\cr
 		Type: 		\tab Package	\cr
-		Version: 	\tab 0.5.1		\cr
-		Date: 		\tab 2013-09-27	\cr
+		Version: 	\tab 0.5.2		\cr
+		Date: 		\tab 2013-09-30	\cr
 		License: 	\tab GPL (>= 2)	\cr
 	}
 	Functions for the Rudas, Clogg and Lindsay \eqn{\pi^{*}}{pi*} mixture index of fit.

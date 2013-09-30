@@ -96,7 +96,7 @@
 	H <- matrix((1:4)*1e1, byrow=TRUE, ncol=2)
 
 	#	pi* for independence in a 2-by-2 table
-	h <- pistar(proc='2by2', data=H, alpha=1, jack=TRUE)
+	h <- pistar(proc="2by2", data=H, alpha=1, jack=TRUE)
 
 	#	print 'pistar' object
 	h

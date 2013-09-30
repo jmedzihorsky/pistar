@@ -94,6 +94,6 @@ piplot.ct(fn, data, ..., from = .Machine$double.neg.eps^0.25,
 
 	a
 
-	plot(a, color='red')
+	plot(a, color="red")
 }
 \keyword{pistar}

@@ -16,7 +16,7 @@ Objects can be created by calls of the form \code{new("PistarMVN", ...)} or \cod
 %%  ~~ describe objects here ~~ 
 }
 \usage{
-\S4method{plot}{PistarMVN}(x, lty = 1, lwd = 1, col = 'black', ... )
+\S4method{plot}{PistarMVN}(x, lty = 1, lwd = 1, col = "black", ... )
 }
 \arguments{
 	\item{x}{
