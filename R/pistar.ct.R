@@ -83,7 +83,7 @@ pistar.ct <-
 	pistar_list <- list(est = res$pi_out)
 	param_list  <- list(est = res$param)
 	llrs_list   <- list(est = res$lr)
-	iter_list   <- list(est = u$iter)
+	iter_list   <- list(est = n_iter)
 	pred_list   <- list(model = res$model, 
 						unres = res$unrestricted, 
 						combi = res$predicted)

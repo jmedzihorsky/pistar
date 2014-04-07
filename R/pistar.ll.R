@@ -5,7 +5,7 @@
 
 pistar.ll <-
 	function(data,
-			 margin 	= list(1, 2),
+			 margin 	= NA,
 			 start 		= rep(1, length(data)),
 			 eps 		= 1e-1,
 			 iter 		= 1e3,
@@ -23,6 +23,10 @@ pistar.ll <-
 {
 	thecall <- match.call()	
 	O <- data
+
+	if (is.na(margin)) {
+		margin <- as.list(1:length(dim(O)))
+	}
 
 	rcl.em.loglin <-
 		function(pi_out,
