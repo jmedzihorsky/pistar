@@ -15,4 +15,4 @@ You can install it using `devtools`
 
 `library(devtools)`
 
-`install_github("pistar", username="jmedzihorsky")`
+`install_github("jmedzihorsky/pistar")`
