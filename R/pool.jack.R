@@ -1,6 +1,6 @@
 #	Pooling of jackknifed estimates
 #	Juraj Medzihorsky
-#	06 September 2013
+#	2014-12-02
 
 
 pool.jack <-
@@ -14,44 +14,57 @@ pool.jack <-
 			 upper 	= Inf,
 			 bias 	= FALSE)
 {
-	j <- jack_est			
 	e <- estimate
+	j <- jack_est			
 	
-	n <- ifelse(ct, sum(data), length(data))	
-	k <- ifelse(ct, data, 1)
-	m <- ifelse(ct, sum(j*k)/n, mean(j))			
-		
-	if (bias) {
-		se <- sqrt( (n-1)/n * sum( k * (j-m)^2 ) )
-		bias <- (n-1)*(m-e)							# unfinished
+	n <- ifelse(ct, sum(data), length(data))	#	No. cases
+	#	Weight
+	if (ct) {
+		w <- as.vector(data)	
+		if ( (length(w)-length(j)) == sum(w==0) ) {
+			w <- w[w!=0]						#	assumes no js for empty cells
+		}
 	} else {
-		se <- sqrt( (n-1)/n * sum( k * (j-e)^2 ) )			
+		w <- rep(1, n)
+	}
+	#
+	m <- ifelse(ct, sum(j*w)/n, mean(j))		#	Weighted mean jack value
+
+
+	if (bias) {
+		se <- sqrt( (n-1)/n * sum( w * (j-m)^2 ) )
+		bias <- n*e - (n-1)*m					#	bias corrected stat
+		#	bias <- (n-1)*(m-e)					# 	bias
+		theta <- m
+	} else {
+		se <- sqrt( (n-1)/n * sum( w * (j-e)^2 ) )
+		theta <- e		
 	}
 		
 	side <- tolower(side)
 			
 	if (length(grep('au', side))==1) {
-		side <- ifelse(e > 0, 'lower', 'upper')
+		side <- ifelse(theta > 0, 'lower', 'upper')
 	}
 		
 	
 	if (length(grep('lo', side))==1) {
 		
 		side <- 'lower'
-		low <- max(e - qnorm(conf)*se, lower)
+		low <- max(theta - qnorm(conf)*se, lower)
 	   	upp <- upper
 		
 	} else if (length(grep('up', side))==1) {
 		
 		side <- 'upper'
 		low <- lower 
-		upp <- min(e + qnorm(conf)*se, upper)
+		upp <- min(theta + qnorm(conf)*se, upper)
 		
 	} else if (length(side)==0) {							#	!!!!!!!!! 
 		
 		side <- 'both'
-		low <- max(e - qnorm(1-(1-conf)/2)*se, lower)
-		upp <- min(e + qnorm(1-(1-conf)/2)*se, upper)
+		low <- max(theta - qnorm(1-(1-conf)/2)*se, lower)
+		upp <- min(theta + qnorm(1-(1-conf)/2)*se, upper)
 		
 	} else {
 		

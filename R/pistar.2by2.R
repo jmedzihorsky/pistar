@@ -1,6 +1,6 @@
 #	`pistar.2by2` for S4 class
 #	Juraj Medzihorsky
-#	27 August 2013
+#	2014-12-02
 
 
 pistar.2by2 <-
@@ -60,21 +60,27 @@ pistar.2by2 <-
 	
 	if (jack) {
 		
-		aux.1 <- function(i){				#	rename ?
+		auxjack <- function(i){				
 			data[i] <- data[i] - 1 
 			return(data)
 		}
 
-		aux.2 <- function(x){
+		auxpi <- function(x){
 			pistar.2by2(data 	= x, 
 						alpha 	= alpha, 
 						verbose = FALSE, 
 						jack 	= FALSE)
 		}
 
-		B <- lapply(1:prod(dim(O)), aux.1)	#	length(O) instead ?
+		rep_vec <- which(as.vector(O)!=0)
 
-		jack_all <- lapply(B, aux.2)
+		if (verbose) {
+			cat('Jackknife in progress, no. rep. =', length(rep_vec), '\n\n')
+		}
+
+		B <- lapply(rep_vec, auxjack)	
+
+		jack_all <- lapply(B, auxpi)
 
 		pistar_list$jack <- sapply(jack_all, function(x) x@pistar$est)
 			
@@ -85,14 +91,14 @@ pistar.2by2 <-
 	
 	
 	out <- Pistar2by2(
-					call 	= thecall,
-					pistar	= pistar_list, 
-					pred	= list(model = M, 
+					  call 	= thecall,
+					  pistar	= pistar_list, 
+					  pred	= list(model = M, 
 								   unres = O - M, 
 								   combi = O),
-					data 	= O, 					
-					param	= param_list
-					)
+					  data 	= O,
+					  param	= param_list
+					  )
 
 	
 	return(out)

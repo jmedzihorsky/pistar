@@ -1,6 +1,6 @@
 #	`pistar.mvn` with S4 class output
 #	Juraj Medzihorsky
-#	27 August 2013	
+#	2014-12-02
 
 pistar.mvn <-
 	function(data		,

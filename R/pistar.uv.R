@@ -1,6 +1,6 @@
 #	`pistar.uv` with S4 class output
 #	Juraj Medzihorsky
-#	27 August 2013
+#	2014-12-02
 
 pistar.uv <-
 	function(data, 
@@ -195,10 +195,6 @@ pistar.uv <-
 	
 	if (jack) {
 
-		if (verbose) {
-			cat('jackknife in progress ...')
-		}
-						
 		aux.1.disc <- function(x){
 			data[x] <- data[x] - 1
 			return(data)
@@ -226,11 +222,17 @@ pistar.uv <-
 
 
 		if (discrete) {
-			B <- lapply(1:length(data), aux.1.disc)	
+			rep_vec <- which(as.vector(data)!=0)
+			B <- lapply(rep_vec, aux.1.disc)	
 		} else {
-			B <- lapply(1:length(data), aux.1.cont)
+			rep_vec <- 1:length(data)
+			B <- lapply(rep_vec, aux.1.cont)
 		}
 		
+		if (verbose) {
+			cat('Jackknife in progress, no. rep. =', length(rep_vec), '\n...\n\n')
+		}
+						
 		jack_all <- lapply(B, aux.2)
 			
 
@@ -281,5 +283,4 @@ pistar.uv <-
 
 	return(out)
 
-	
 }

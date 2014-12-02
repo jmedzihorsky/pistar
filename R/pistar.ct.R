@@ -1,6 +1,6 @@
 #	`pistar.ct` with S4 class output
 #	Juraj Medzihorsky
-#	27 August 2013
+#	2014-12-02
 
 
 pistar.ct <-
@@ -91,16 +91,12 @@ pistar.ct <-
 	
 	if (jack) {
 		
-		if (verbose) {
-			cat('jackknife in progress ...')
-		}
-			
-		aux.1 <- function(x){
+		auxjack <- function(x){
 			data[x] <- data[x] - 1 
 			return(data)
 		}
 
-		aux.2 <- function(x){
+		auxpi <- function(x){
 			pistar.ct(fn = fn, 
 					  data = x, 
   					  from = from,
@@ -114,9 +110,15 @@ pistar.ct <-
 					  verbose = FALSE)
 		}
 
-		B <- lapply(1:prod(dim(O)), aux.1)
+		rep_vec <- which(as.vector(O)!=0)
 
-		jack_all <- lapply(B, aux.2)
+		if (verbose) {
+			cat('Jackknife in progress, no. rep. =', length(rep_vec), '\n...\n\n')
+		}
+			
+		B <- lapply(rep_vec, auxjack)
+
+		jack_all <- lapply(B, auxpi)
 			
 
 		pistar_list$jack <- sapply(jack_all, function(x) x@pistar$est)
