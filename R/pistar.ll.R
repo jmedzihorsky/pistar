@@ -24,7 +24,7 @@ pistar.ll <-
 	thecall <- match.call()	
 	O <- data
 
-	if (is.na(margin)) {
+	if (is.na(margin)[1]) {
 		margin <- as.list(1:length(dim(O)))
 	}
 
