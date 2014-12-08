@@ -33,11 +33,12 @@ pool.jack <-
 
 	if (bias) {
 		se <- sqrt( (n-1)/n * sum( w * (j-m)^2 ) )
+		bias <- (n-1)*(m-e)						# 	bias
 		theta_bc <- n*e - (n-1)*m				#	bias corrected stat
-		#	bias <- (n-1)*(m-e)					# 	bias
 		theta <- theta_bc
 	} else {
 		se <- sqrt( (n-1)/n * sum( w * (j-e)^2 ) )
+		bias <- as.numeric(NA)
 		theta <- e		
 	}
 		
@@ -76,6 +77,7 @@ pool.jack <-
 	out <- list(se = se, 
 				low = low,
 				upp = upp,				
+				theta = theta,
 				conf = conf,
 				side = side,
 				bias = bias)

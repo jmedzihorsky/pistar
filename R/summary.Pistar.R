@@ -1,6 +1,6 @@
 #	`summary` function for class `Pistar`
 #	Juraj Medzihorsky	
-#	07 September 2013
+#	2014-12-08
 
 
 setMethod('summary',
@@ -45,8 +45,8 @@ setMethod('summary',
 						  estimate 	= o@pistar$est,
 						  jack_est 	= o@pistar$jack,
 						  conf 		= conf,
-						  lower 	= 0,	#	lower used only for `other quantities`
-						  upper 	= 1,	#	upper used only for `other quantities`
+						  lower 	= 0,	#	`lower` arg used only for `other quantities`
+						  upper 	= 1,	#	`upper` arg used only for `other quantities`
 						  side 		= pi_side,
 						  bias 		= bias)
 		
@@ -54,6 +54,7 @@ setMethod('summary',
 							   se 		= pi_p$se,
 							   lower 	= pi_p$low,
 							   upper 	= pi_p$upp,
+							   theta 	= pi_p$theta,
 							   conf 	= pi_p$conf,
 							   side 	= pi_p$side,
 							   bias 	= pi_p$bias)
@@ -86,6 +87,7 @@ setMethod('summary',
 						   se 		= t_p$se,
 						   lower 	= t_p$low,
 						   upper 	= t_p$upp,
+						   theta	= t_p$theta,
 						   conf 	= t_p$conf,
 						   side 	= t_p$side,
 						   bias 	= t_p$bias)
@@ -111,9 +113,19 @@ setMethod('summary',
 		
 	}
 
-	
-	S <- rbind(o_pistar, o_param)
 
+	if (ncol(o_pistar)>1) {	
+		if (is.na(o_pistar$bias)) {
+			take <- c('est', 'se', 'lower', 'upper', 'conf', 'side', 'bias')
+			S <- rbind(o_pistar[, take], o_param[, take])
+		} else {
+			take <- c('theta', 'se', 'lower', 'upper', 'conf', 'side', 'bias')
+			S <- rbind(o_pistar[, take], o_param[, take])
+		}
+	} else {
+		S <- rbind(o_pistar, o_param)
+	} 
+						  
 
 	if ( nrow(S)>1 ) {
 
