@@ -1,6 +1,6 @@
 #	`pistar.uv` with S4 class output
 #	Juraj Medzihorsky
-#	2014-12-02
+#	2014-12-08
 
 pistar.uv <-
 	function(data, 
@@ -230,7 +230,7 @@ pistar.uv <-
 		}
 		
 		if (verbose) {
-			cat('Jackknife in progress, no. rep. =', length(rep_vec), '\n...\n\n')
+			cat('Jackknife in progress, no. rep. =', length(rep_vec), '\n...')
 		}
 						
 		jack_all <- lapply(B, aux.2)
@@ -251,7 +251,7 @@ pistar.uv <-
 		
 		
 		if (verbose) {
-			cat(' done\n\n')
+			cat(' done.\n\n')
 		}			
 	} 
 	

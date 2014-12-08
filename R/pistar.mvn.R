@@ -1,6 +1,6 @@
 #	`pistar.mvn` with S4 class output
 #	Juraj Medzihorsky
-#	2014-12-02
+#	2014-12-08
 
 pistar.mvn <-
 	function(data		,
@@ -72,7 +72,7 @@ pistar.mvn <-
 	if ((jack) & (!cor_matrix)) {
 		
 		if (verbose) {
-			cat('jackknife in progress ...')
+			cat('Jackknife in progress, no. rep. =', nrow(data), '\n...')
 		}
 			
 		aux.1.matrix <- function(x, y=data){
@@ -100,7 +100,7 @@ pistar.mvn <-
 		
 		
 		if (verbose) {
-			cat(' done\n\n')
+			cat(' done.\n\n')
 		}
 	
 	} else if ((jack) & (cor_matrix)) {

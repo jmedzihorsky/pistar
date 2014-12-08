@@ -1,6 +1,6 @@
 #	`pistar.ct` with S4 class output
 #	Juraj Medzihorsky
-#	2014-12-02
+#	2014-12-08
 
 
 pistar.ct <-
@@ -113,7 +113,7 @@ pistar.ct <-
 		rep_vec <- which(as.vector(O)!=0)
 
 		if (verbose) {
-			cat('Jackknife in progress, no. rep. =', length(rep_vec), '\n...\n\n')
+			cat('Jackknife in progress, no. rep. =', length(rep_vec), '\n...')
 		}
 			
 		B <- lapply(rep_vec, auxjack)
@@ -142,7 +142,7 @@ pistar.ct <-
 		}
 
 		if (verbose) {
-			cat(' done\n\n')
+			cat(' done.\n\n')
 		}	
 	}
 

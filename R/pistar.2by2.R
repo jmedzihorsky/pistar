@@ -1,6 +1,6 @@
 #	`pistar.2by2` for S4 class
 #	Juraj Medzihorsky
-#	2014-12-02
+#	2014-12-08
 
 
 pistar.2by2 <-
@@ -75,7 +75,7 @@ pistar.2by2 <-
 		rep_vec <- which(as.vector(O)!=0)
 
 		if (verbose) {
-			cat('Jackknife in progress, no. rep. =', length(rep_vec), '\n\n')
+			cat('Jackknife in progress, no. rep. =', length(rep_vec), '\n...')
 		}
 
 		B <- lapply(rep_vec, auxjack)	
@@ -84,6 +84,7 @@ pistar.2by2 <-
 
 		pistar_list$jack <- sapply(jack_all, function(x) x@pistar$est)
 			
+		cat(' done.\n\n')
 	} 
 
 	
