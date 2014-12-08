@@ -1,6 +1,6 @@
 #	Pooling of jackknifed estimates
 #	Juraj Medzihorsky
-#	2014-12-02
+#	2014-12-08
 
 
 pool.jack <-
@@ -33,9 +33,9 @@ pool.jack <-
 
 	if (bias) {
 		se <- sqrt( (n-1)/n * sum( w * (j-m)^2 ) )
-		bias <- n*e - (n-1)*m					#	bias corrected stat
+		theta_bc <- n*e - (n-1)*m				#	bias corrected stat
 		#	bias <- (n-1)*(m-e)					# 	bias
-		theta <- m
+		theta <- theta_bc
 	} else {
 		se <- sqrt( (n-1)/n * sum( w * (j-e)^2 ) )
 		theta <- e		
