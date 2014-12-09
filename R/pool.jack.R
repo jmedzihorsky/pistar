@@ -1,6 +1,6 @@
 #	Pooling of jackknifed estimates
 #	Juraj Medzihorsky
-#	2014-12-08
+#	2014-12-09
 
 
 pool.jack <-
@@ -14,6 +14,7 @@ pool.jack <-
 			 upper 	= Inf,
 			 bias 	= FALSE)
 {
+	p <- 1 - (1-conf)/2
 	e <- estimate
 	j <- jack_est			
 	
@@ -52,14 +53,14 @@ pool.jack <-
 	if (length(grep('lo', side))==1) {
 		
 		side <- 'lower'
-		low <- max(theta - qnorm(conf)*se, lower)
+		low <- max(theta - qnorm(p)*se, lower)
 	   	upp <- upper
 		
 	} else if (length(grep('up', side))==1) {
 		
 		side <- 'upper'
 		low <- lower 
-		upp <- min(theta + qnorm(conf)*se, upper)
+		upp <- min(theta + qnorm(p)*se, upper)
 		
 	} else if (length(side)==0) {							#	!!!!!!!!! 
 		
