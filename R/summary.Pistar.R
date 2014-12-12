@@ -113,19 +113,22 @@ setMethod('summary',
 		
 	}
 
-
+						  
 	if (ncol(o_pistar)>1) {	
 		if (is.na(o_pistar$bias)) {
 			take <- c('est', 'se', 'lower', 'upper', 'conf', 'side', 'bias')
-			S <- rbind(o_pistar[, take], o_param[, take])
 		} else {
 			take <- c('theta', 'se', 'lower', 'upper', 'conf', 'side', 'bias')
+		}
+		if (is.null(o_param$est)) {	
+			S <- rbind(o_pistar[, take])
+		} else {
 			S <- rbind(o_pistar[, take], o_param[, take])
 		}
 	} else {
 		S <- rbind(o_pistar, o_param)
 	} 
-						  
+
 
 	if ( nrow(S)>1 ) {
 
