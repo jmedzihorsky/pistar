@@ -1,6 +1,6 @@
 #	`summary` function for class `Pistar`
 #	Juraj Medzihorsky	
-#	2014-12-08
+#	2014-12-12
 
 
 setMethod('summary',
