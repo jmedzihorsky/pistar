@@ -37,22 +37,23 @@ function(pi_out,
 	
 	E <- s_o*(M_n+U_n)
 
-	
+	fil <- data!=0
+	lr_stat <- 2*sum(data[fil]*log(data[fil]/E[fil]))
+
 	if (lr_only) {
-		
-		out <- 2*sum(data*log(data/E)) - lr_eps - chi_stat
-		
+
+		out <- lr_stat - lr_eps - chi_stat
+
 	} else {
-		
+
 		out <- list(pi_out = pi_out,
 					param = FNEM(s_o*M_n/(1-pi_out))$param,		# ----
-					lr = 2*sum(data*log(data/E)),
+					lr = lr_stat,
 					model = s_o*M_n,				   	
 					unrestricted = s_o*U_n,
 					predicted = s_o*(M_n+U_n))
 
 	}
-		
-		return(out)
-		
+	
+	return(out)
 }
