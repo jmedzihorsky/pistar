@@ -1,6 +1,6 @@
 #	`pistar.ll` for S4 class
 #	Juraj Medzihorsky
-#	2014-12-08
+#	2015-03-04
 
 
 pistar.ll <-
@@ -15,7 +15,7 @@ pistar.ll <-
 			 to 		= 1-.Machine$double.neg.eps^0.25,				 
 			 jack 		= FALSE,		 
 			 lr_eps 	= .Machine$double.neg.eps^0.25,			 
-			 max_dif 	= .Machine$double.neg.eps^0.5,
+			 max_dif 	= .Machine$double.neg.eps,
 			 chi_stat 	= 0,
 			 u_iter 	= 1e3,
 			 tol 		= .Machine$double.eps^0.25,			 
@@ -34,7 +34,8 @@ pistar.ll <-
 	{		
 		d_o <- dim(O)
  		s_o <- sum(O)  	
- 				
+ 		pi_in <- 1-pi_out		
+
 		f1 <- loglin(table = O,
 					 margin = margin,
 					 start = start,
@@ -43,36 +44,38 @@ pistar.ll <-
 					 fit=TRUE,
 					 print = FALSE)$fit
 
-		M_s <- (1-pi_out)*f1
+		M_s <- pi_in*f1/s_o
 		U_s <- array(pi_out/prod(d_o), d_o)
 	
 		dif <- 1e0
 		
-		while (abs(dif) > max_dif) {
-			M_w <- O*M_s/(M_s+U_s)
-			U_w <- O*U_s/(M_s+U_s)	
-			f2 <- loglin(table = M_w,
+		while (dif > max_dif) {
+			B_s <- M_s + U_s
+			M_w <- O*M_s/B_s
+			U_w <- O*U_s/B_s	
+			f2 <- loglin(table = M_w/pi_in,
 						 margin = margin,
 						 start = start,
 						 eps = eps,
 						 iter = iter,
 						 fit = TRUE,
 						 print = FALSE)$fit
-
-
-			M_n <- (1-pi_out)*f2/sum(f2)
+			M_n <- pi_in*f2/sum(f2)
  			U_n <- pi_out*U_w/sum(U_w)
-			dif <- sum(abs((M_s+U_s)-(M_n+U_n)))				
+			dif <- sum((B_s-M_n-U_n)^2)				
 			M_s <- M_n
 			U_s <- U_n
 		}
 		
 		E <- s_o*(M_n+U_n)
 		
+		fil <- O!=0
+		lr_stat <- 2*sum(O[fil]*log(O[fil]/E[fil])) - lr_eps - chi_stat	
+
 		if (lr_only) {
-			out <- 2*sum(O*log(O/E)) - lr_eps - chi_stat	
+			out <- lr_stat
 		} else {	
-			f3 <- loglin(table = s_o*M_n/(1-pi_out),
+			f3 <- loglin(table = s_o*M_n/pi_in,
 						 margin = margin,
 						 start = start,
 						 eps = eps,
@@ -82,10 +85,10 @@ pistar.ll <-
 
 			out <- list(pi_out = pi_out,
 						param = unlist(f3),		
-						lr = 2*sum(O*log(O/E)),
+						lr = lr_stat,
 						model = s_o*M_n,				   	
 						unrestricted = s_o*U_n,
-						predicted = s_o*(M_n+U_n))
+						predicted = E)
 		}	
 			return(out)
 	}

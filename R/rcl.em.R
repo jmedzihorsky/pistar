@@ -2,7 +2,7 @@ rcl.em <-
 function(pi_out,
 			 FNEM,
 			 data,
-			 max_dif = .Machine$double.neg.eps^0.5,
+			 max_dif = .Machine$double.neg.eps,
 			 zeta = 1,
 			 lr_only = TRUE,
 			 chi_stat = 0,
@@ -12,23 +12,25 @@ function(pi_out,
 	
 	d_o <- dim(data)
 	s_o <- sum(data)  	
-			
-	M_s <- (1-pi_out)*FNEM(data)$fit
+		
+	pi_in <- 1-pi_out	
+	M_s <- pi_in*FNEM(data)$fit/s_o
 	U_s <- array(pi_out/prod(d_o), d_o)
 
 	dif <- 1e0
 	
-	while (abs(dif) > max_dif) {
+	while (dif > max_dif) {
 
-		M_w <- Z*M_s/(M_s+U_s)
-		U_w <- Z*U_s/(M_s+U_s)	
+		B_s <- M_s + U_s
+		M_w <- Z*M_s/B_s
+		U_w <- Z*U_s/B_s	
 
-		f2 <- FNEM(M_w)$fit
+		f2 <- FNEM(M_w/pi_in)$fit
 		
-		M_n <- (1-pi_out)*f2/sum(f2)
+		M_n <- pi_in*f2/sum(f2)
 		U_n <- pi_out*U_w/sum(U_w)
 		
-		dif <- sum(abs((M_s+U_s)-(M_n+U_n)))
+		dif <- sum((B_s-M_n-U_n)^2)
 				
 		M_s <- M_n
 		U_s <- U_n
@@ -47,7 +49,7 @@ function(pi_out,
 	} else {
 
 		out <- list(pi_out = pi_out,
-					param = FNEM(s_o*M_n/(1-pi_out))$param,		# ----
+					param = FNEM(s_o*M_n/pi_in)$param,		# ----
 					lr = lr_stat,
 					model = s_o*M_n,				   	
 					unrestricted = s_o*U_n,

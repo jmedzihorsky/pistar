@@ -28,7 +28,7 @@ pistar.ct(data, fn, from = .Machine$double.neg.eps^0.25,
           to = 1 - .Machine$double.neg.eps^0.25, jack = FALSE, 
           method = "uniroot", u_iter = 1e3, zeta = 1, 
           lr_eps = .Machine$double.neg.eps^0.25, 
-          max_dif = .Machine$double.neg.eps^0.5, chi_stat = 0, verbose = TRUE)
+          max_dif = .Machine$double.neg.eps, chi_stat = 0, verbose = TRUE)
 }
 \arguments{
 	\item{data}{

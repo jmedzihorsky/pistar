@@ -22,7 +22,7 @@ pistar.ll(data, margin = list(1, 2), start = rep(1, length(data)), eps = 0.1,
           from = .Machine$double.neg.eps^0.25, 
           to = 1 - .Machine$double.neg.eps^0.25, jack = FALSE, 
           lr_eps = .Machine$double.neg.eps^0.25, 
-          max_dif = .Machine$double.neg.eps^0.5, chi_stat = 0, u_iter = 1e3, 
+          max_dif = .Machine$double.neg.eps, chi_stat = 0, u_iter = 1e3, 
           tol = .Machine$double.eps^0.25, verbose = TRUE)
 }
 \arguments{

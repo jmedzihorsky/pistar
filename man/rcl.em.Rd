@@ -10,7 +10,7 @@
 	Rudas-Clogg-Lindsay (1994) EM algorithm.
 }
 \usage{
-rcl.em(pi_out, FNEM, data, max_dif = .Machine$double.neg.eps^0.5, 
+rcl.em(pi_out, FNEM, data, max_dif = .Machine$double.neg.eps, 
        zeta = 1, lr_only = TRUE, chi_stat = 0, 
        lr_eps = .Machine$double.neg.eps^0.25)
 }

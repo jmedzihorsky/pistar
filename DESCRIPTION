@@ -1,8 +1,8 @@
 Package: pistar
 Type: Package
 Title: Rudas, Clogg and Lindsay Mixture Index of Fit
-Version: 0.5.2.4
-Date: 2015-02-23
+Version: 0.5.2.5
+Date: 2015-03-04
 Authors@R: person("Juraj", "Medzihorsky", 
                   role = c("aut", "cre"), 
                   email = "juraj.medzihorsky@gmail.com")

@@ -13,7 +13,7 @@ pistar.ct <-
 			 u_iter 	= 1e3,		
 			 zeta 		= 1,
 			 lr_eps 	= .Machine$double.neg.eps^0.25,			 
-			 max_dif 	= .Machine$double.neg.eps^0.5,
+			 max_dif 	= .Machine$double.neg.eps,
 			 chi_stat 	= 0,			 
 			 verbose 	= TRUE)
 {
