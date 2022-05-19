@@ -1,8 +1,8 @@
 # pistar
 
-`pistar` is a set of tools for applying the Rudas-Clogg-Lindsay mixture 
-index of fit in a variety of settings.
-
+`pistar` is a set of tools for applying the Rudas-Clogg-Lindsay $\pi$\* mixture index of fit,
+also known as minimum mixture estimation (MME),
+in a variety of settings.
 
 ## Manual
 
